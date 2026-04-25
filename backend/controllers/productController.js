@@ -1,6 +1,5 @@
 const Product = require('../models/Product');
 
-// সব প্রোডাক্ট দেখার জন্য (কাস্টমার ও অ্যাডমিন উভয়ের জন্য)
 exports.getProducts = async (req, res) => {
     try {
         const products = await Product.find().sort({ createdAt: -1 });
@@ -10,7 +9,16 @@ exports.getProducts = async (req, res) => {
     }
 };
 
-// নতুন প্রোডাক্ট অ্যাড করার জন্য
+exports.getProductById = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) return res.status(404).json({ message: "Product not found" });
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 exports.addProduct = async (req, res) => {
     try {
         const newProduct = new Product(req.body);
