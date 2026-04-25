@@ -23,8 +23,14 @@ const Navbar = () => {
             <div style={{ padding: '0 20px', height: 60, display: 'flex', alignItems: 'center', gap: 12 }}>
 
                 {/* Logo */}
-                <Link to="/" style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a', textDecoration: 'none', letterSpacing: '-0.5px', marginRight: 8, flexShrink: 0 }}>
-                    Q<span style={{ color: '#4ecdc4' }}>C</span>
+                <Link to="/" style={{ textDecoration: 'none', marginRight: 8, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="10" fill="#1a1a1a"/>
+                        <path d="M10 12h4l3 8 5-12 4 12 3-8h3" stroke="#4ecdc4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <circle cx="30" cy="28" r="4" fill="#4ecdc4"/>
+                        <path d="M30 26v4M28 28h4" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round"/>
+                    </svg>
+                    <span style={{ fontSize: 16, fontWeight: 800, color: '#1a1a1a', letterSpacing: '-0.5px' }}>Snap<span style={{ color: '#4ecdc4' }}>Order</span></span>
                 </Link>
 
                 {/* Search — hidden on mobile */}
@@ -50,11 +56,6 @@ const Navbar = () => {
                     </button>
                     <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, padding: 4 }}>♡</button>
 
-                    {/* Admin link — desktop */}
-                    <Link to="/admin/login" style={{ fontSize: 12, fontWeight: 600, color: '#555', textDecoration: 'none', background: '#f4f4f4', padding: '6px 12px', borderRadius: 7, border: '1px solid #ebebeb' }}
-                          className="admin-link-desktop">
-                        Admin
-                    </Link>
 
                     {/* Hamburger — mobile only */}
                     <button
@@ -82,10 +83,6 @@ const Navbar = () => {
                         <span style={{ fontSize: 13, color: '#aaa' }}>🔍</span>
                         <input placeholder="Search products..." style={{ border: 'none', background: 'transparent', fontSize: 13, color: '#333', outline: 'none', flex: 1, fontFamily: 'inherit' }} />
                     </div>
-                    <Link to="/admin/login" onClick={() => setMenuOpen(false)}
-                          style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', textDecoration: 'none', padding: '8px 0', borderBottom: '1px solid #f0f0f0' }}>
-                        Admin Panel →
-                    </Link>
                     <div style={{ display: 'flex', gap: 16, paddingTop: 4 }}>
                         {['Products', 'About', 'Contact'].map(l => (
                             <span key={l} style={{ fontSize: 13, color: '#666', cursor: 'pointer', fontWeight: 500 }}>{l}</span>
