@@ -337,7 +337,7 @@ export default function AdminDashboard() {
                                             </thead>
                                             <tbody>
                                                 {orders.map((order, idx) => (
-                                                    <tr key={order._id}>
+                                                    <tr key={order._id} onClick={() => setSelectedOrder(order)} style={{ cursor: 'pointer' }}>
                                                         <td>{idx + 1}</td>
                                                         <td><code>#{order._id.slice(-6).toUpperCase()}</code></td>
                                                         <td>{new Date(order.createdAt).toLocaleDateString()}</td>
