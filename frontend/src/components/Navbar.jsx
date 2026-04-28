@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const { totalItems, setShowCart } = useCart();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 10);
@@ -33,13 +35,12 @@ const Navbar = () => {
                     <span style={{ fontSize: 16, fontWeight: 800, color: '#1a1a1a', letterSpacing: '-0.5px' }}>Snap<span style={{ color: '#4ecdc4' }}>Order</span></span>
                 </Link>
 
-                {/* Search — hidden on mobile */}
+                {/* Search */}
                 <div style={{
                     flex: 1, maxWidth: 400,
                     display: 'flex', alignItems: 'center',
                     background: '#f7f7f7', border: '1px solid #ebebeb',
                     borderRadius: 8, padding: '0 12px', height: 36, gap: 8,
-                    // hide on mobile via inline is tricky; we use a wrapper
                 }} className="search-wrap">
                     <span style={{ fontSize: 13, color: '#aaa' }}>🔍</span>
                     <input
@@ -50,14 +51,17 @@ const Navbar = () => {
 
                 {/* Right icons */}
                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <button style={{ position: 'relative', background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, padding: 4 }}>
+                    <button onClick={() => setShowCart(true)} style={{ position: 'relative', background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, padding: 4 }}>
                         🛒
-                        <span style={{ position: 'absolute', top: -2, right: -2, background: '#4ecdc4', color: '#fff', fontSize: 9, fontWeight: 700, width: 15, height: 15, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</span>
+                        {totalItems > 0 && (
+                            <span style={{ position: 'absolute', top: -4, right: -6, background: '#ff6b6b', color: '#fff', fontSize: 10, fontWeight: 700, minWidth: 18, height: 18, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4px' }}>
+                                {totalItems > 99 ? '99+' : totalItems}
+                            </span>
+                        )}
                     </button>
                     <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, padding: 4 }}>♡</button>
 
-
-                    {/* Hamburger — mobile only */}
+                    {/* Hamburger */}
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="hamburger-btn"
@@ -69,7 +73,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile dropdown menu */}
+            {/* Mobile dropdown */}
             <div style={{
                 maxHeight: menuOpen ? 200 : 0,
                 overflow: 'hidden',
@@ -78,7 +82,6 @@ const Navbar = () => {
                 background: '#fff',
             }} className="mobile-menu">
                 <div style={{ padding: '12px 20px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {/* Mobile search */}
                     <div style={{ display: 'flex', alignItems: 'center', background: '#f7f7f7', border: '1px solid #ebebeb', borderRadius: 8, padding: '0 12px', height: 36, gap: 8 }}>
                         <span style={{ fontSize: 13, color: '#aaa' }}>🔍</span>
                         <input placeholder="Search products..." style={{ border: 'none', background: 'transparent', fontSize: 13, color: '#333', outline: 'none', flex: 1, fontFamily: 'inherit' }} />
@@ -91,14 +94,12 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Responsive CSS */}
             <style>{`
-        @media (max-width: 640px) {
-          .search-wrap { display: none !important; }
-          .admin-link-desktop { display: none !important; }
-          .hamburger-btn { display: flex !important; }
-        }
-      `}</style>
+                @media (max-width: 640px) {
+                    .search-wrap { display: none !important; }
+                    .hamburger-btn { display: flex !important; }
+                }
+            `}</style>
         </nav>
     );
 };
