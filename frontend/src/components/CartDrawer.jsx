@@ -124,58 +124,59 @@ export default function CartDrawer() {
                                         {cartItems.map(item => (
                                             <div key={item.variantKey} style={{
                                                 padding: '16px 24px', borderBottom: '1px solid #f5f5f5', display: 'flex', gap: 14,
-                                                minWidth: 0
+                                                minWidth: 0, alignItems: 'flex-start'
                                             }}>
                                                 <img src={item.productImage} alt={item.productName} style={{
-                                                    width: 72, height: 72, borderRadius: 12, objectFit: 'cover', background: '#f5f5f3', flexShrink: 0
+                                                    width: 90, height: 90, borderRadius: 12, objectFit: 'cover', background: '#f5f5f3', flexShrink: 0
                                                 }} />
                                                 <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                                                        <div style={{ flex: 1, minWidth: 0 }}>
-                                                            <h4 style={{ fontSize: 14, fontWeight: 700, color: '#1a1a1a', margin: 0, lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.productName}</h4>
-                                                            <div style={{ marginTop: 6, display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-                                                                {item.availableColors?.length > 0 && (
-                                                                    <div style={{ display: 'flex', gap: 4 }}>
-                                                                        {item.availableColors.map(c => (
-                                                                            <button key={c} onClick={() => handleVariantChange(item.variantKey, c, item.size)}
-                                                                                style={{ padding: '2px 8px', borderRadius: 12, fontSize: 10, fontWeight: 600, border: `2px solid ${item.color === c ? '#4ecdc4' : '#e0e0e0'}`, background: item.color === c ? '#4ecdc4' : '#fff', color: item.color === c ? '#fff' : '#666', cursor: 'pointer' }}>
-                                                                                {c}
-                                                                            </button>
-                                                                        ))}
-                                                                    </div>
-                                                                )}
-                                                                {item.availableSizes?.length > 0 && (
-                                                                    <div style={{ display: 'flex', gap: 4 }}>
-                                                                        {item.availableSizes.map(s => (
-                                                                            <button key={s} onClick={() => handleVariantChange(item.variantKey, item.color, s)}
-                                                                                style={{ width: 30, height: 30, borderRadius: 6, fontSize: 10, fontWeight: 700, border: `2px solid ${item.size === s ? '#4ecdc4' : '#e0e0e0'}`, background: item.size === s ? '#4ecdc4' : '#fff', color: item.size === s ? '#fff' : '#666', cursor: 'pointer' }}>
-                                                                                {s}
-                                                                            </button>
-                                                                        ))}
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                                                        <h4 style={{ fontSize: 14, fontWeight: 700, color: '#1a1a1a', margin: 0, lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 'calc(100% - 30px)' }}>{item.productName}</h4>
                                                         <button onClick={() => removeFromCart(item.variantKey)} style={{
-                                                            background: 'none', border: 'none', color: '#ccc', cursor: 'pointer', fontSize: 14, padding: 4
+                                                            background: 'none', border: 'none', color: '#ccc', cursor: 'pointer', fontSize: 14, padding: 4, flexShrink: 0
                                                         }}>✕</button>
                                                     </div>
+
+                                                    {item.availableColors?.length > 0 && (
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                                                            <span style={{ fontSize: 11, color: '#aaa', minWidth: 40 }}>Color</span>
+                                                            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                                                                {item.availableColors.map(c => (
+                                                                    <button key={c} onClick={() => handleVariantChange(item.variantKey, c, item.size)}
+                                                                        style={{ padding: '3px 10px', borderRadius: 12, fontSize: 10, fontWeight: 600, border: `2px solid ${item.color === c ? '#4ecdc4' : '#e0e0e0'}`, background: item.color === c ? '#4ecdc4' : '#fff', color: item.color === c ? '#fff' : '#666', cursor: 'pointer' }}>
+                                                                        {c}
+                                                                    </button>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {item.availableSizes?.length > 0 && (
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                                                            <span style={{ fontSize: 11, color: '#aaa', minWidth: 40 }}>Size</span>
+                                                            <div style={{ display: 'flex', gap: 4 }}>
+                                                                {item.availableSizes.map(s => (
+                                                                    <button key={s} onClick={() => handleVariantChange(item.variantKey, item.color, s)}
+                                                                        style={{ width: 32, height: 32, borderRadius: 6, fontSize: 11, fontWeight: 700, border: `2px solid ${item.size === s ? '#4ecdc4' : '#e0e0e0'}`, background: item.size === s ? '#4ecdc4' : '#fff', color: item.size === s ? '#fff' : '#666', cursor: 'pointer' }}>
+                                                                        {s}
+                                                                    </button>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
                                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                                            <span style={{ fontSize: 11, color: '#aaa', minWidth: 40 }}>Qty</span>
                                                             <button onClick={() => updateQuantity(item.variantKey, item.quantity - 1)} style={{
-                                                                width: 28, height: 28, background: '#f5f5f5', border: 'none', borderRadius: 6, cursor: 'pointer',
-                                                                fontSize: 14, color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                                                width: 28, height: 28, background: '#f5f5f5', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 16, color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center'
                                                             }}>−</button>
                                                             <span style={{ fontSize: 14, fontWeight: 700, minWidth: 20, textAlign: 'center' }}>{item.quantity}</span>
                                                             <button onClick={() => updateQuantity(item.variantKey, item.quantity + 1)} style={{
-                                                                width: 28, height: 28, background: '#f5f5f5', border: 'none', borderRadius: 6, cursor: 'pointer',
-                                                                fontSize: 14, color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                                                width: 28, height: 28, background: '#f5f5f5', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 16, color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center'
                                                             }}>+</button>
                                                         </div>
-                                                        <div style={{ textAlign: 'right' }}>
-                                                            <span style={{ fontSize: 15, fontWeight: 800, color: '#1a1a1a' }}>৳{(item.price * item.quantity).toLocaleString()}</span>
-                                                            {item.discount > 0 && <span style={{ fontSize: 11, color: '#999', textDecoration: 'line-through', marginLeft: 6 }}>৳{(item.originalPrice * item.quantity).toLocaleString()}</span>}
-                                                        </div>
+                                                        <span style={{ fontSize: 16, fontWeight: 800, color: '#1a1a1a' }}>৳{(item.price * item.quantity).toLocaleString()}</span>
                                                     </div>
                                                 </div>
                                             </div>
