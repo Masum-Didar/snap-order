@@ -42,7 +42,9 @@ export const CartProvider = ({ children }) => {
                 originalPrice: product.originalPrice || 0,
                 discount: product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0,
                 quantity,
-                maxStock: product.stock
+                maxStock: product.stock,
+                availableColors: product.colors || [],
+                availableSizes: product.sizes || []
             }]);
         }
     };
@@ -57,6 +59,27 @@ export const CartProvider = ({ children }) => {
         ));
     };
 
+    const updateVariant = (variantKey, newColor, newSize) => {
+        const newVariantKey = `${variantKey.split('-')[0]}-${newColor}-${newSize}`;
+        const existing = cartItems.find(item => item.variantKey === newVariantKey);
+
+        if (existing) {
+            setCartItems(cartItems.map(item =>
+                item.variantKey === variantKey
+                    ? null
+                    : item.variantKey === newVariantKey
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+            ).filter(Boolean));
+        } else {
+            setCartItems(cartItems.map(item =>
+                item.variantKey === variantKey
+                    ? { ...item, color: newColor, size: newSize, variantKey: newVariantKey }
+                    : item
+            ));
+        }
+    };
+
     const removeFromCart = (variantKey) => {
         setCartItems(cartItems.filter(item => item.variantKey !== variantKey));
     };
@@ -69,7 +92,7 @@ export const CartProvider = ({ children }) => {
     return (
         <CartContext.Provider value={{
             cartItems, showCart, setShowCart,
-            addToCart, updateQuantity, removeFromCart, clearCart,
+            addToCart, updateQuantity, updateVariant, removeFromCart, clearCart,
             totalItems, totalAmount
         }}>
             {children}

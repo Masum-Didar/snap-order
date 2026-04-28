@@ -5,21 +5,11 @@ import { useCart } from '../context/CartContext';
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const { addToCart, setShowCart } = useCart();
-    const [selectedColor, setSelectedColor] = useState(product.colors?.length ? product.colors[0] : '');
-    const [selectedSize, setSelectedSize] = useState(product.sizes?.length ? product.sizes[0] : '');
     const [added, setAdded] = useState(false);
 
     const handleAddToCart = (e) => {
         e.stopPropagation();
-        if (product.colors?.length && !selectedColor) {
-            alert('Please select a color');
-            return;
-        }
-        if (product.sizes?.length && !selectedSize) {
-            alert('Please select a size');
-            return;
-        }
-        addToCart(product, selectedColor, selectedSize, 1);
+        addToCart(product, '', '', 1);
         setAdded(true);
         setTimeout(() => setAdded(false), 1500);
         setShowCart(true);
@@ -78,42 +68,6 @@ const ProductCard = ({ product }) => {
                     )}
                 </div>
 
-                {/* Color selector */}
-                {product.colors?.length > 0 && (
-                    <div style={{ display: 'flex', gap: 6, marginBottom: 10, flexWrap: 'wrap' }}>
-                        {product.colors.map(c => (
-                            <button key={c} onClick={(e) => { e.stopPropagation(); setSelectedColor(c); }}
-                                style={{
-                                    padding: '3px 10px', borderRadius: 20, fontSize: 10, fontWeight: 600,
-                                    border: `2px solid ${selectedColor === c ? '#1a1a1a' : '#e0e0e0'}`,
-                                    background: selectedColor === c ? '#1a1a1a' : '#fff',
-                                    color: selectedColor === c ? '#fff' : '#666',
-                                    cursor: 'pointer', transition: 'all 0.15s'
-                                }}>
-                                {c}
-                            </button>
-                        ))}
-                    </div>
-                )}
-
-                {/* Size selector */}
-                {product.sizes?.length > 0 && (
-                    <div style={{ display: 'flex', gap: 6, marginBottom: 12 }}>
-                        {product.sizes.map(s => (
-                            <button key={s} onClick={(e) => { e.stopPropagation(); setSelectedSize(s); }}
-                                style={{
-                                    width: 36, height: 36, borderRadius: 8, fontSize: 11, fontWeight: 700,
-                                    border: `2px solid ${selectedSize === s ? '#1a1a1a' : '#e0e0e0'}`,
-                                    background: selectedSize === s ? '#1a1a1a' : '#fff',
-                                    color: selectedSize === s ? '#fff' : '#666',
-                                    cursor: 'pointer', transition: 'all 0.15s'
-                                }}>
-                                {s}
-                            </button>
-                        ))}
-                    </div>
-                )}
-
                 <button
                     onClick={handleAddToCart}
                     disabled={product.stock === 0}
@@ -125,7 +79,7 @@ const ProductCard = ({ product }) => {
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6
                     }}>
                     {added ? (
-                        <>✓ Added to Cart</>
+                        <>✓ Added</>
                     ) : product.stock === 0 ? (
                         'Out of Stock'
                     ) : (

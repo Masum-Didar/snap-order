@@ -45,30 +45,33 @@ const Home = () => {
             <Navbar />
 
             {/* Hero */}
-            <div style={{ position: 'relative', background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)', height: 'clamp(220px, 40vw, 340px)', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+            <div style={{ position: 'relative', background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)', height: 'clamp(280px, 45vw, 420px)', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
                 <div style={{ position: 'absolute', inset: 0, background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")', zIndex: 1 }} />
-                <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
-                    <div style={{ fontSize: 120, opacity: 0.15 }}>🛍</div>
+                <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
+                    <div style={{ width: 280, height: 280, borderRadius: '50%', background: 'rgba(78,205,196,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ fontSize: 80 }}>🛍️</div>
+                    </div>
                 </div>
                 <div style={{ position: 'relative', zIndex: 3, padding: 'clamp(24px, 4vw, 48px) clamp(20px, 5vw, 60px)', color: '#fff' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                        <span style={{ width: 24, height: 2, background: '#4ecdc4', borderRadius: 2 }} />
-                        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#4ecdc4' }}>New Season 2025</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                        <span style={{ width: 32, height: 2, background: '#4ecdc4', borderRadius: 2 }} />
+                        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#4ecdc4' }}>New Season {new Date().getFullYear()}</span>
                     </div>
-                    <div style={{ fontSize: 'clamp(28px, 6vw, 52px)', fontWeight: 300, lineHeight: 1.1, letterSpacing: '-1px', marginBottom: 8 }}>
+                    <div style={{ fontSize: 'clamp(32px, 7vw, 58px)', fontWeight: 300, lineHeight: 1.05, letterSpacing: '-1px', marginBottom: 12 }}>
                         Discover<br /><strong style={{ fontWeight: 800, color: '#4ecdc4' }}>Your Style</strong>
                     </div>
-                    <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', marginBottom: 20, maxWidth: 320, lineHeight: 1.6 }}>Explore our curated collection of premium fashion and accessories</p>
-                    <div style={{ display: 'flex', gap: 12 }}>
-                        <button onClick={() => document.querySelector('.products-section')?.scrollIntoView({ behavior: 'smooth' })} style={{ background: '#4ecdc4', color: '#1a1a1a', border: 'none', borderRadius: 8, padding: '12px 24px', fontSize: 13, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', marginBottom: 28, maxWidth: 360, lineHeight: 1.6 }}>Explore our curated collection of premium fashion and accessories</p>
+                    <div style={{ display: 'flex', gap: 14 }}>
+                        <button onClick={() => document.querySelector('.products-section')?.scrollIntoView({ behavior: 'smooth' })} style={{ background: '#4ecdc4', color: '#1a1a1a', border: 'none', borderRadius: 10, padding: '14px 28px', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 4px 15px rgba(78,205,196,0.4)' }}>
                             Shop Now
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         </button>
-                        <button onClick={() => setShowCart(true)} style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, padding: '12px 24px', fontSize: 13, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
+                        <button onClick={() => setShowCart(true)} style={{ background: 'rgba(255,255,255,0.08)', color: '#fff', border: '1px solid rgba(255,255,255,0.25)', borderRadius: 10, padding: '14px 28px', fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', backdropFilter: 'blur(4px)' }}>
                             Cart{totalItems > 0 ? ` (${totalItems})` : ''}
                         </button>
                     </div>
                 </div>
+                <div style={{ position: 'absolute', bottom: -1, left: 0, right: 0, height: 40, background: 'linear-gradient(to bottom, transparent, #f8f9fa)' }} />
             </div>
 
             {/* Featured / Banner Strip */}
@@ -172,17 +175,17 @@ const Home = () => {
 
                     {/* Product Grid */}
                     {sorted.length === 0 ? (
-                        <div style={{ textAlign: 'center', padding: '5rem 0', background: '#fff', borderRadius: 16 }}>
-                            <div style={{ fontSize: 52, marginBottom: 16 }}>🔍</div>
-                            <p style={{ fontWeight: 700, fontSize: 16, color: '#888', marginBottom: 4 }}>No products found</p>
+                        <div style={{ textAlign: 'center', padding: '5rem 0', background: '#fff', borderRadius: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
+                            <div style={{ fontSize: 48, marginBottom: 12 }}>🔍</div>
+                            <p style={{ fontWeight: 700, fontSize: 16, color: '#555', marginBottom: 4 }}>No products found</p>
                             <p style={{ fontSize: 13, color: '#aaa' }}>Try adjusting your search or filters</p>
-                            <button onClick={() => { setSearchQuery(''); setSort('popular'); }} style={{ marginTop: 16, background: '#1a1a1a', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 24px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear Filters</button>
+                            <button onClick={() => { setSearchQuery(''); setSort('popular'); }} style={{ marginTop: 16, background: '#1a1a1a', color: '#fff', border: 'none', borderRadius: 10, padding: '12px 28px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Clear Filters</button>
                         </div>
                     ) : (
                         <div style={{
                             display: 'grid',
-                            gridTemplateColumns: view === 'list' ? '1fr' : 'repeat(auto-fill, minmax(180px, 1fr))',
-                            gap: 16
+                            gridTemplateColumns: view === 'list' ? '1fr' : 'repeat(auto-fill, minmax(249px, 1fr))',
+                            gap: 20
                         }}>
                             {sorted.map(p => <ProductCard key={p._id} product={p} />)}
                         </div>
@@ -217,13 +220,13 @@ const Home = () => {
                     </div>
                     <div>
                         <h4 style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: 12, color: '#4ecdc4' }}>Contact</h4>
-                        <p style={{ fontSize: 13, color: '#888', marginBottom: 6 }}>📞 +880 1XXX XXXXXX</p>
+                        <p style={{ fontSize: 13, color: '#888', marginBottom: 6 }}>📞 +880 1993627246</p>
                         <p style={{ fontSize: 13, color: '#888', marginBottom: 6 }}>✉️ support@snaporder.com</p>
                         <p style={{ fontSize: 13, color: '#888' }}>📍 Dhaka, Bangladesh</p>
                     </div>
                 </div>
                 <div style={{ maxWidth: 1200, margin: '24px auto 0', paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', fontSize: 12, color: '#555' }}>
-                    © 2025 SnapOrder. All rights reserved.
+                    © {new Date().getFullYear()} SnapOrder. All rights reserved.
                 </div>
             </footer>
 
